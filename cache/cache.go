@@ -15,6 +15,10 @@ var (
 	rdbCtx      context.Context
 )
 
+type CacheConfig struct {
+	Driver CacheDriver
+}
+
 type CacheDriver interface {
 	Init() error
 	Set(key string, value interface{}) error
@@ -107,9 +111,9 @@ func (r *RedisCacheDriver) Clear() error {
 }
 
 type MemoryCacheDriver struct {
-	cache     map[string]interface{}
-	expiry    map[string]time.Time
-	mutex     sync.RWMutex
+	cache      map[string]interface{}
+	expiry     map[string]time.Time
+	mutex      sync.RWMutex
 	Expiration time.Duration
 }
 
@@ -124,7 +128,7 @@ func (m *MemoryCacheDriver) Set(key string, value interface{}) error {
 	defer m.mutex.Unlock()
 
 	m.cache[key] = value
-	
+
 	m.expiry[key] = time.Now().Add(time.Second * m.Expiration)
 	return nil
 }

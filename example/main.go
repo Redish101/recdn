@@ -9,9 +9,17 @@ import (
 )
 
 func main() {
-	cache.SetDriver(&cache.MemoryCacheDriver{
-		Expiration: time.Duration(1),
+	app, _ := recdn.New(&recdn.AppConfig{
+		Cache: cache.CacheConfig{
+			Driver: &cache.MemoryCacheDriver{
+				Expiration: time.Duration(15),
+			},
+		},
+		GitHub: recdn.GitHubConfig{
+			Raw: "https://ghraw.chuqis.com/%s/%s/%s",
+		},
 	})
-	file, _ := recdn.Fetch("https://redish101.top/")
-	fmt.Println(file)
+	data, err := app.Npm("redish101-blog", "latest", "package.json")
+	fmt.Println(data)
+	fmt.Println(err)
 }

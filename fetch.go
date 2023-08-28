@@ -25,9 +25,9 @@ func Fetch(path string) (*File, error) {
 	if err != nil {
 		return nil, err
 	}
-	body, err := io.ReadAll(resp.Body)  
+	body, err := io.ReadAll(resp.Body)
 	var cookedData = &File{
-		Type: resp.Header.Get("Content-Type"),
+		Type:    resp.Header.Get("Content-Type"),
 		Content: string(body),
 	}
 	return cookedData, nil
