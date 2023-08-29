@@ -8,6 +8,7 @@ import (
 	"github.com/Redish101/recdn/cache"
 )
 
+// 请求数据
 func Fetch(path string) (*File, error) {
 	cachedData, err := cache.Get(path)
 	if err != nil {

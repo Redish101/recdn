@@ -15,6 +15,7 @@ var (
 	rdbCtx      context.Context
 )
 
+// 缓存配置
 type CacheConfig struct {
 	Driver CacheDriver
 }
