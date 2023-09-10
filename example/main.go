@@ -19,7 +19,7 @@ func main() {
 			Raw: "https://ghraw.chuqis.com/%s/%s/%s",
 		},
 	})
-	data, err := app.Npm("redish101-blog", "latest", "package.json")
+	data, err := app.GitHub("Redish101/blog", "main", "package.min.json")
 	fmt.Println(data)
 	fmt.Println(err)
 }
